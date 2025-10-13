@@ -3,7 +3,7 @@ builder = "NIXPACKS"
 buildCommand = """
 corepack enable
 composer install --no-dev --optimize-autoloader
-npm ci
+npm install
 npm run build
 """
 
