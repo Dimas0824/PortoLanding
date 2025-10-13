@@ -48,9 +48,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     card.style.right = 'auto';
                     card.style.marginLeft = 'auto';
                     card.style.marginRight = 'auto';
+                    card.style.transform = 'translateX(0) scale(1)';
+
                 } else {
                     card.classList.add('hidden');
                     card.style.display = 'none';
+                    card.style.transform = 'translateX(0) scale(0)';
+
                 }
             });
         } else {
@@ -58,28 +62,48 @@ document.addEventListener('DOMContentLoaded', function () {
             const prevIndex = (currentIndex - 1 + totalCards) % totalCards;
             const nextIndex = (currentIndex + 1) % totalCards;
 
+            // Apply transformations
             cards[prevIndex].classList.add('prev');
             cards[prevIndex].style.display = 'block';
             cards[prevIndex].style.position = 'absolute';
+            cards[prevIndex].style.transform = 'translateX(-40%) scale(0.75)';
 
             cards[currentIndex].classList.add('active');
             cards[currentIndex].style.display = 'block';
             cards[currentIndex].style.position = 'absolute';
+            cards[currentIndex].style.transform = 'translateX(0) scale(1)';
 
             cards[nextIndex].classList.add('next');
             cards[nextIndex].style.display = 'block';
             cards[nextIndex].style.position = 'absolute';
+            cards[nextIndex].style.transform = 'translateX(40%) scale(0.75)';
 
             // Hide other cards
             cards.forEach((card, index) => {
                 if (index !== prevIndex && index !== currentIndex && index !== nextIndex) {
                     card.classList.add('hidden');
                     card.style.display = 'none';
+                    card.style.transform = 'translateX(0) scale(0)';
                 }
             });
+
+            // Center the track
+            if (carouselTrack) {
+                carouselTrack.style.width = '100%';
+                carouselTrack.style.justifyContent = 'center';
+            }
         }
 
         // Update dots
+        updateDots();
+
+        // Reset animation lock after transition
+        setTimeout(() => {
+            isAnimating = false;
+        }, 500);
+    }
+
+    function updateDots() {
         dots.forEach((dot, index) => {
             if (index === currentIndex) {
                 dot.classList.add('w-8', 'bg-[#f53003]');
@@ -88,13 +112,12 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 dot.classList.remove('w-8', 'bg-[#f53003]');
                 dot.classList.add('w-2', 'bg-[#e3e3e0]');
+                // Ensure dark mode styles are applied
+                if (document.documentElement.classList.contains('dark')) {
+                    dot.classList.add('dark:bg-[#3E3E3A]');
+                }
             }
         });
-
-        // Reset animation lock after transition
-        setTimeout(() => {
-            isAnimating = false;
-        }, 500);
     }
 
     function goToSlide(index) {

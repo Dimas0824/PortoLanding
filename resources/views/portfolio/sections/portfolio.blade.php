@@ -66,7 +66,7 @@
             </button>
 
             <!-- Carousel Container -->
-            <div class="carousel-container relative h-[28rem] md:h-[36rem]">
+            <div class="carousel-container relative h-[28rem] md:h-[36rem] overflow-hidden">
                 <div class="carousel-track flex items-center justify-center h-full">
                     @foreach ($portfolios as $index => $portfolio)
                         <div
