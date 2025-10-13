@@ -1,6 +1,6 @@
 [build]
-builder = "NIXPACKS"
-buildCommand = "bash -c 'composer install --no-dev --optimize-autoloader && npm install && npm run build'"
+builder = "paketobuildpacks/builder:base"
+buildCommand = "composer install --no-dev --optimize-autoloader && npm install && npm run build"
 
 [deploy]
-startCommand = "php artisan serve --host=0.0.0.0 --port=$PORT"
+startCommand = "php -S 0.0.0.0:$PORT -t public"
