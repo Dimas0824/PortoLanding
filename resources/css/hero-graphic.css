@@ -1,0 +1,388 @@
+/* resources/css/hero-graphic.css */
+
+/* Container & Base Setup */
+.hero-graphic-container {
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    isolation: isolate;
+}
+
+/* Orbits Styling */
+.orbit {
+    border: 1px dashed rgba(255, 123, 0, 0.2);
+    position: absolute;
+    animation: pulse-orbit 4s ease-in-out infinite;
+}
+
+.orbit-outer {
+    animation-duration: 3s;
+}
+
+.orbit-inner {
+    animation-duration: 5s;
+    animation-delay: 1s;
+}
+
+/* Planet Wrappers for Rotation */
+.planet-wrapper {
+    animation: orbit-rotation 20s linear infinite;
+}
+
+.planet-outer-wrapper {
+    animation-duration: 25s;
+}
+
+.planet-inner-wrapper {
+    animation-duration: 15s;
+    animation-direction: reverse;
+}
+
+/* Planets Base Styling */
+.planet {
+    border-radius: 50%;
+    position: relative;
+}
+
+/* Small Planets */
+.planet-small {
+    width: 24px;
+    height: 24px;
+}
+
+@media (min-width: 640px) {
+    .planet-small {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.planet-1 {
+    top: 50%;
+    left: -12px;
+    transform: translateY(-50%);
+}
+
+.planet-2 {
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Small Planet Surfaces */
+.planet-small .planet-surface {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    animation: planet-rotation 10s linear infinite;
+}
+
+.planet-1 .planet-surface {
+    background: linear-gradient(135deg, #F8B803, #ffab00, #ff8f00);
+    box-shadow:
+        inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.planet-2 .planet-surface {
+    background: linear-gradient(135deg, #ff5722, #ff3c00, #d32f2f);
+    box-shadow:
+        inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Small Planet Glows */
+.planet-small .planet-glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.planet-1 .planet-glow {
+    background: radial-gradient(circle, rgba(248, 184, 3, 0.4), transparent 70%);
+}
+
+.planet-2 .planet-glow {
+    background: radial-gradient(circle, rgba(255, 60, 0, 0.4), transparent 70%);
+}
+
+/* Main Planet */
+.planet-main {
+    width: 120px;
+    height: 120px;
+    animation: float-animation 6s ease-in-out infinite;
+}
+
+@media (min-width: 640px) {
+    .planet-main {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .planet-main {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Main Planet Surface */
+.planet-surface-main {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #ff7b00, #ff5722, #ff3c00);
+    box-shadow:
+        inset -10px -10px 20px rgba(0, 0, 0, 0.4),
+        inset 10px 10px 20px rgba(255, 123, 0, 0.3),
+        0 0 60px rgba(255, 87, 34, 0.3);
+    animation: planet-rotation 30s linear infinite;
+    overflow: hidden;
+}
+
+/* Main Planet Glow */
+.planet-glow-main {
+    position: absolute;
+    inset: -30px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 123, 0, 0.5),
+        rgba(255, 87, 34, 0.3) 40%,
+        transparent 70%
+    );
+    filter: blur(15px);
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Planet Texture */
+.planet-texture {
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+    );
+    mix-blend-mode: overlay;
+}
+
+/* Planet Circuits (Tech Pattern) */
+.planet-circuits {
+    background-image:
+        linear-gradient(45deg, transparent 48%, rgba(248, 184, 3, 0.1) 49%, rgba(248, 184, 3, 0.1) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(255, 123, 0, 0.1) 49%, rgba(255, 123, 0, 0.1) 51%, transparent 52%);
+    background-size: 20px 20px;
+    animation: circuit-flow 20s linear infinite;
+    opacity: 0.5;
+}
+
+/* Tech Elements (Floating dots) */
+.tech-elements {
+    animation: orbit-rotation 15s linear infinite reverse;
+}
+
+.tech-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F8B803, #ff7b00);
+    box-shadow: 0 0 10px rgba(248, 184, 3, 0.8);
+    animation: tech-pulse 2s ease-in-out infinite;
+}
+
+.tech-dot-1 {
+    top: 10%;
+    left: 50%;
+    animation-delay: 0s;
+}
+
+.tech-dot-2 {
+    top: 50%;
+    right: 10%;
+    animation-delay: 0.7s;
+}
+
+.tech-dot-3 {
+    bottom: 15%;
+    left: 15%;
+    animation-delay: 1.4s;
+}
+
+/* Particle Effects */
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: linear-gradient(135deg, #ff7b00, #F8B803);
+    border-radius: 50%;
+    opacity: 0;
+    animation: particle-flow 8s linear infinite;
+}
+
+.particle-0 { left: 10%; top: 20%; }
+.particle-1 { left: 30%; top: 10%; }
+.particle-2 { left: 50%; top: 15%; }
+.particle-3 { left: 70%; top: 25%; }
+.particle-4 { left: 85%; top: 40%; }
+.particle-5 { left: 75%; top: 60%; }
+.particle-6 { left: 25%; top: 75%; }
+.particle-7 { left: 45%; top: 85%; }
+
+/* Animations */
+@keyframes orbit-rotation {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes planet-rotation {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes float-animation {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.02);
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pulse-orbit {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.02);
+    }
+}
+
+@keyframes circuit-flow {
+    from {
+        background-position: 0 0, 0 0;
+    }
+    to {
+        background-position: 40px 40px, -40px -40px;
+    }
+}
+
+@keyframes tech-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+@keyframes particle-flow {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0);
+    }
+    10% {
+        opacity: 1;
+        transform: translate(10px, -10px) scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translate(30px, -30px) scale(0.8);
+    }
+    90% {
+        opacity: 0.2;
+        transform: translate(50px, -50px) scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(60px, -60px) scale(0);
+    }
+}
+
+/* Canvas Background */
+#stars-canvas {
+    opacity: 0.8;
+}
+
+/* Hero Text Enhancements */
+.hero-text h2 {
+    text-shadow:
+        0 2px 20px rgba(255, 123, 0, 0.3),
+        0 4px 40px rgba(255, 60, 0, 0.2);
+}
+
+/* Gradient Animation for Text */
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.bg-clip-text {
+    background-size: 200% auto;
+    animation: gradient-shift 3s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 639px) {
+    .hero-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .orbit {
+        border-width: 0.5px;
+    }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+    .orbit {
+        border-color: rgba(255, 123, 0, 0.3);
+    }
+
+    .planet-surface-main {
+        box-shadow:
+            inset -10px -10px 20px rgba(0, 0, 0, 0.6),
+            inset 10px 10px 20px rgba(255, 123, 0, 0.4),
+            0 0 80px rgba(255, 87, 34, 0.4);
+    }
+}
+
+/* Parallax effect preparation */
+.hero-graphic-container[data-parallax="true"] .planet-main {
+    transition: transform 0.3s ease-out;
+}
+
+.hero-graphic-container[data-parallax="true"] .planet-wrapper {
+    transition: transform 0.4s ease-out;
+}
+
+.hero-graphic-container[data-parallax="true"] .orbit {
+    transition: transform 0.5s ease-out;
+}
