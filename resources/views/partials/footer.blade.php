@@ -1,7 +1,7 @@
 <footer class="w-full max-w-7xl mx-auto px-6 lg:px-8 py-12 mt-20 border-t border-[#e3e3e0] dark:border-[#3E3E3A]">
     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
         <div class="text-sm text-[#706f6c] dark:text-[#A1A09A]">
-            &copy; {{ date('Y') }} Your Name. All rights reserved.
+            &copy; {{ date('Y') }} Dimas. All rights reserved.
         </div>
 
         <div class="flex items-center gap-6">
