@@ -1,5 +1,5 @@
 [build]
-builder = "paketobuildpacks/builder:base"
+builder = "PACK"
 buildCommand = "composer install --no-dev --optimize-autoloader && npm install && npm run build"
 
 [deploy]
