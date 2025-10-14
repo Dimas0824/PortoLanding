@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PortfolioController::class, 'index'])->name('home');
 
-Route::get('/health', function () {
-    return response()->json(['status' => 'ok']);
-});
+Route::get('/health', fn() => response()->json([
+    'status' => 'ok',
+    'app' => config('app.name'),
+    'env' => config('app.env'),
+    'version' => config('app.version', '1.0.0'),
+    'time' => now()->toIso8601String(),
+]));

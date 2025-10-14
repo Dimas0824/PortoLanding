@@ -5,6 +5,19 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
+    safelist: [
+        'lg:w-[32rem]',
+        'h-[36rem]',
+        'aspect-video',
+        'w-full',
+        'flex',
+        'items-center',
+        'justify-center',
+        'transition-all',
+        'duration-500',
+        'ease-in-out',
+        'transform',
+    ],
     darkMode: 'class',
     theme: {
         extend: {
