@@ -9,8 +9,6 @@
 </head>
 
 <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-[#EDEDEC] min-h-screen">
-    @include('partials.header')
-
     <main>
         @yield('content')
     </main>

@@ -41,13 +41,27 @@
 }
 
 /* Carousel Base Styles */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .carousel-card {
     transform: translateX(0) scale(0.75);
     opacity: 0.8;
     z-index: 20;
     pointer-events: none;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: calc(100vw - 2rem);
 }
 
 .carousel-card.active {
@@ -75,8 +89,8 @@
     pointer-events: none;
 }
 
-/* Hover Effects - Desktop Only */
-@media (min-width: 769px) {
+/* Desktop (1024px and up) */
+@media (min-width: 1024px) {
     .carousel-card.active:hover {
         transform: translateX(0) scale(1.05);
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 30px rgba(245, 48, 3, 0.3);
@@ -89,41 +103,9 @@
     }
 }
 
-/* Tablet Responsive (768px - 1024px) */
-@media (max-width: 1024px) {
-    .carousel-card.prev {
-        transform: translateX(-35%) scale(0.7);
-    }
-
-    .carousel-card.next {
-        transform: translateX(35%) scale(0.7);
-    }
-}
-
-/* Mobile Responsive (Below 768px) */
-@media (max-width: 768px) {
-    /* Hide side cards completely on mobile */
-    .carousel-card.prev,
-    .carousel-card.next {
-        opacity: 0;
-        transform: translateX(0) scale(0);
-        pointer-events: none;
-        display: none !important;
-    }
-
-    /* Center and enlarge active card */
-    .carousel-card.active {
-        position: relative !important;
-        transform: translateX(0) scale(1);
-        width: 100% !important;
-        max-width: calc(100vw - 2rem);
-        left: auto !important;
-        right: auto !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-
-    /* Adjust carousel container height for mobile */
+/* Tablet and Mobile (Below 1024px) */
+@media (max-width: 1023px) {
+    /* Reset carousel for mobile horizontal scroll */
     .carousel-container {
         height: auto !important;
         min-height: 30rem;
@@ -131,6 +113,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
         overflow: hidden;
     }
 
@@ -140,7 +123,28 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
+        height: 100%;
+    }
+
+    /* Mobile card styles - horizontal sliding */
+    .carousel-card {
+        position: absolute !important;
+        width: 100% !important;
+        max-width: calc(100vw - 2rem);
+        height: auto !important;
+        left: 0;
+        opacity: 1 !important;
+        z-index: 20;
+        pointer-events: auto !important;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Remove hover effects on mobile */
+    .carousel-card.prev,
+    .carousel-card.next,
+    .carousel-card.hidden {
+        opacity: 1 !important;
+        pointer-events: auto !important;
     }
 
     /* Hide navigation buttons on mobile */
@@ -151,40 +155,38 @@
 
     /* Make dots more prominent on mobile */
     .carousel-dot {
-        width: 8px !important;
-        height: 8px !important;
+        width: 10px !important;
+        height: 10px !important;
+        cursor: pointer;
+        touch-action: manipulation;
     }
 
     .carousel-dot.w-8 {
-        width: 24px !important;
+        width: 28px !important;
     }
 }
 
-/* Extra Small Mobile (Below 480px) */
-@media (max-width: 480px) {
-    .carousel-card.active {
-        max-width: calc(100vw - 1.5rem);
-    }
-
+/* Mobile specific (Below 768px) */
+@media (max-width: 768px) {
     .carousel-container {
         min-height: 32rem;
-        padding: 0 0.75rem;
+    }
+
+    .carousel-card {
+        max-width: calc(100vw - 2rem);
+    }
+
+    /* Prevent horizontal scroll */
+    body {
+        overflow-x: hidden;
+    }
+
+    #portfolio {
+        overflow-x: hidden;
     }
 }
 
-/* Very Small Mobile (Below 375px) */
-@media (max-width: 375px) {
-    .carousel-card.active {
-        max-width: calc(100vw - 1rem);
-    }
-
-    .carousel-container {
-        min-height: 28rem;
-        padding: 0 0.5rem;
-    }
-}
-
-/* Card Content Responsive */
+/* Small Mobile (Below 640px) */
 @media (max-width: 640px) {
     /* Adjust card padding */
     .carousel-card .p-6 {
@@ -213,44 +215,27 @@
     }
 }
 
-/* Smooth transitions for all breakpoints */
-.carousel-card,
-.carousel-track {
-    will-change: transform, opacity;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Prevent horizontal scroll on mobile */
-@media (max-width: 768px) {
-    .carousel-track {
-            width: 100vw;
-            left: 0;
-            right: 0;
-            padding: 0 1rem;
-    }
-
-    body {
-        overflow-x: hidden;
+/* Extra Small Mobile (Below 480px) */
+@media (max-width: 480px) {
+    .carousel-card {
+        max-width: calc(100vw - 1.5rem);
     }
 
     .carousel-container {
-        width: 100%;
-        max-width: 100vw;
-        padding: 0;
+        min-height: 28rem;
+        padding: 0 0.75rem;
     }
+}
 
+/* Very Small Mobile (Below 375px) */
+@media (max-width: 375px) {
     .carousel-card {
-        width: 100% !important;
-        max-width: calc(100vw - 2rem) !important;
-        left: 0 !important;
-        right: 0 !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
+        max-width: calc(100vw - 1rem);
     }
 
-    /* Ensure section doesn't create horizontal scroll */
-    #portfolio {
-        overflow-x: hidden;
+    .carousel-container {
+        min-height: 26rem;
+        padding: 0 0.5rem;
     }
 }
 
@@ -259,7 +244,7 @@
     .carousel-dot {
         width: 12px !important;
         height: 12px !important;
-        margin: 0 4px;
+        margin: 0 6px;
         touch-action: manipulation;
     }
 
@@ -268,23 +253,14 @@
     }
 }
 
-/* Line clamp utilities for text truncation */
-.line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+/* Smooth transitions for all breakpoints */
+.carousel-card,
+.carousel-track {
+    will-change: transform, opacity;
 }
 
 /* Ensure consistent card height in carousel */
-@media (min-width: 769px) {
+@media (min-width: 1024px) {
     .carousel-card > div {
         height: 100%;
     }
@@ -298,7 +274,7 @@
     }
 
     /* Adjust tech tags for better wrapping */
-    .flex-wrap span {
+    .carousel-card .flex-wrap span {
         font-size: 0.625rem;
         padding: 0.25rem 0.5rem;
     }
@@ -310,7 +286,7 @@
 }
 
 /* Smooth hover transitions - Desktop only */
-@media (min-width: 769px) {
+@media (min-width: 1024px) {
     .group:hover {
         transform: translateY(-2px);
         transition: transform 0.3s ease;
@@ -318,8 +294,25 @@
 }
 
 /* Disable hover effect on mobile */
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
     .group:hover {
         transform: none;
     }
+}
+
+/* Line clamp utilities for text truncation */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

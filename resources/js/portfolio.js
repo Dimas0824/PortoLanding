@@ -16,82 +16,88 @@ document.addEventListener('DOMContentLoaded', function () {
     let touchEndX = 0;
     const minSwipeDistance = 50;
 
-    // Check if mobile
+    // Check if mobile or tablet
     function isMobile() {
-        return window.innerWidth < 768;
+        return window.innerWidth < 1024; // Changed from 768 to 1024 for tablet support
     }
 
     function updateCarousel() {
         if (isAnimating) return;
         isAnimating = true;
 
-        // Remove all classes first
-        cards.forEach(card => {
-            card.classList.remove('active', 'prev', 'next', 'hidden');
-            // Reset inline styles
-            card.style.display = '';
-            card.style.position = '';
-            card.style.left = '';
-            card.style.right = '';
-            card.style.marginLeft = '';
-            card.style.marginRight = '';
-        });
-
         if (isMobile()) {
-            // Mobile: only show active card, completely hide others
+            // Mobile/Tablet: Horizontal scroll approach
             cards.forEach((card, index) => {
+                card.classList.remove('active', 'prev', 'next', 'hidden');
+                // Reset styles for mobile
+                card.style.display = 'block';
+                card.style.position = 'absolute';
+                card.style.width = '100%';
+                card.style.left = `${index * 100}%`;
+                card.style.transform = `translateX(${-currentIndex * 100}%)`;
+                card.style.opacity = '1';
+                card.style.zIndex = '20';
+
+                // Add active class to current card for styling purposes
                 if (index === currentIndex) {
                     card.classList.add('active');
-                    card.style.display = 'block';
-                    card.style.position = 'relative';
-                    card.style.left = 'auto';
-                    card.style.right = 'auto';
-                    card.style.marginLeft = 'auto';
-                    card.style.marginRight = 'auto';
-                    card.style.transform = 'translateX(0) scale(1)';
-
-                } else {
-                    card.classList.add('hidden');
-                    card.style.display = 'none';
-                    card.style.transform = 'translateX(0) scale(0)';
-
                 }
             });
+
+            // Ensure track is properly sized
+            if (carouselTrack) {
+                carouselTrack.style.position = 'relative';
+                carouselTrack.style.width = '100%';
+                carouselTrack.style.height = '100%';
+            }
         } else {
-            // Desktop: show prev, active, and next
+            // Desktop: Show prev, active, and next with stacked effect
+            cards.forEach(card => {
+                card.classList.remove('active', 'prev', 'next', 'hidden');
+                card.style.display = '';
+                card.style.position = '';
+                card.style.left = '';
+                card.style.right = '';
+                card.style.width = '';
+                card.style.opacity = '';
+                card.style.zIndex = '';
+            });
+
             const prevIndex = (currentIndex - 1 + totalCards) % totalCards;
             const nextIndex = (currentIndex + 1) % totalCards;
 
-            // Apply transformations
+            // Apply desktop transformations
             cards[prevIndex].classList.add('prev');
             cards[prevIndex].style.display = 'block';
             cards[prevIndex].style.position = 'absolute';
             cards[prevIndex].style.transform = 'translateX(-40%) scale(0.75)';
+            cards[prevIndex].style.opacity = '0.8';
+            cards[prevIndex].style.zIndex = '20';
 
             cards[currentIndex].classList.add('active');
             cards[currentIndex].style.display = 'block';
             cards[currentIndex].style.position = 'absolute';
             cards[currentIndex].style.transform = 'translateX(0) scale(1)';
+            cards[currentIndex].style.opacity = '1';
+            cards[currentIndex].style.zIndex = '30';
 
             cards[nextIndex].classList.add('next');
             cards[nextIndex].style.display = 'block';
             cards[nextIndex].style.position = 'absolute';
             cards[nextIndex].style.transform = 'translateX(40%) scale(0.75)';
+            cards[nextIndex].style.opacity = '0.8';
+            cards[nextIndex].style.zIndex = '20';
 
-            // Hide other cards
+            // Hide other cards on desktop
             cards.forEach((card, index) => {
                 if (index !== prevIndex && index !== currentIndex && index !== nextIndex) {
                     card.classList.add('hidden');
                     card.style.display = 'none';
                     card.style.transform = 'translateX(0) scale(0)';
+                    card.style.opacity = '0';
+                    card.style.zIndex = '10';
                 }
             });
-
-            // Center the track
-            if (carouselTrack) {
-                carouselTrack.style.width = '100%';
-                carouselTrack.style.justifyContent = 'center';
-            }
         }
 
         // Update dots
@@ -107,12 +113,10 @@ document.addEventListener('DOMContentLoaded', function () {
         dots.forEach((dot, index) => {
             if (index === currentIndex) {
                 dot.classList.add('w-8', 'bg-[#f53003]');
-                dot.classList.remove('w-2', 'bg-[#e3e3e0]');
-                dot.classList.remove('dark:bg-[#3E3E3A]');
+                dot.classList.remove('w-2', 'bg-[#e3e3e0]', 'dark:bg-[#3E3E3A]');
             } else {
                 dot.classList.remove('w-8', 'bg-[#f53003]');
                 dot.classList.add('w-2', 'bg-[#e3e3e0]');
-                // Ensure dark mode styles are applied
                 if (document.documentElement.classList.contains('dark')) {
                     dot.classList.add('dark:bg-[#3E3E3A]');
                 }
@@ -150,6 +154,10 @@ document.addEventListener('DOMContentLoaded', function () {
         nextBtn.addEventListener('click', nextSlide);
     }
 
+    // Expose navigation functions globally for mobile buttons
+    window.carouselPrev = prevSlide;
+    window.carouselNext = nextSlide;
+
     // Dot navigation
     dots.forEach(dot => {
         dot.addEventListener('click', () => {
@@ -157,19 +165,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') prevSlide();
-        if (e.key === 'ArrowRight') nextSlide();
-    });
+    // Keyboard navigation (desktop only)
+    if (!isMobile()) {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+    }
 
     // Touch/Swipe support for mobile
     if (carouselTrack) {
+        let isScrolling = false;
+
         carouselTrack.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
+            isScrolling = false;
+        }, { passive: true });
+
+        carouselTrack.addEventListener('touchmove', (e) => {
+            isScrolling = true;
         }, { passive: true });
 
         carouselTrack.addEventListener('touchend', (e) => {
+            if (!isScrolling) return;
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         }, { passive: true });
@@ -183,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 isDragging = true;
                 dragStartX = e.clientX;
                 carouselTrack.style.cursor = 'grabbing';
+                e.preventDefault();
             });
 
             document.addEventListener('mousemove', (e) => {
@@ -225,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Auto-play functions
     function startAutoPlay() {
-        // Disable autoplay on mobile for better UX
+        // Only autoplay on desktop
         if (!isMobile()) {
             autoPlayInterval = setInterval(nextSlide, 5000);
         }
@@ -243,35 +262,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Auto-play with pause on hover (desktop only)
-    if (carouselContainer) {
-        carouselContainer.addEventListener('mouseenter', () => {
-            if (!isMobile()) {
-                stopAutoPlay();
-            }
-        });
-
-        carouselContainer.addEventListener('mouseleave', () => {
-            if (!isMobile()) {
-                startAutoPlay();
-            }
-        });
+    if (carouselContainer && !isMobile()) {
+        carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+        carouselContainer.addEventListener('mouseleave', startAutoPlay);
     }
 
     // Responsive handling
     function handleResponsive() {
+        // Clear any lingering styles before update
+        cards.forEach(card => {
+            card.style.transition = 'none'; // Temporarily disable transition
+        });
+
         updateCarousel();
+
+        // Re-enable transitions after a brief delay
+        setTimeout(() => {
+            cards.forEach(card => {
+                card.style.transition = ''; // Re-enable transition
+            });
+        }, 50);
 
         // Restart autoplay based on screen size
         stopAutoPlay();
         startAutoPlay();
 
         // Update cursor for desktop
-        if (carouselTrack) {
-            if (!isMobile()) {
-                carouselTrack.style.cursor = 'grab';
-            } else {
-                carouselTrack.style.cursor = 'default';
-            }
+        if (carouselTrack && !isMobile()) {
+            carouselTrack.style.cursor = 'grab';
+        } else if (carouselTrack) {
+            carouselTrack.style.cursor = 'default';
         }
     }
 
@@ -286,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             stopAutoPlay();
-        } else {
+        } else if (!isMobile()) {
             resetAutoPlay();
         }
     });
@@ -294,10 +314,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize carousel
     updateCarousel();
 
-    // Start autoplay after a short delay
-    setTimeout(() => {
-        startAutoPlay();
-    }, 1000);
+    // Start autoplay after a short delay (desktop only)
+    if (!isMobile()) {
+        setTimeout(startAutoPlay, 1000);
+    }
 
     // Set initial cursor for desktop
     if (carouselTrack && !isMobile()) {

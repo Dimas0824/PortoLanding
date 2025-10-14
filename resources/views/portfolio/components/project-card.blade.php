@@ -11,7 +11,7 @@
     </div>
 
     <!-- Content Container -->
-    <div class="p-4 sm:p-5 md:p-6 flex flex-col flex-grow">
+    <div class="p-4 sm:p-5 md:p-6 flex flex-col justify-between flex-grow">
         <!-- Title -->
         <h3
             class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 group-hover:text-[#f53003] dark:group-hover:text-[#FF4433] transition-colors line-clamp-2">
