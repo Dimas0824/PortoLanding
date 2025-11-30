@@ -1,5 +1,6 @@
-<div
-    class="bg-white dark:bg-[#161615] rounded-lg overflow-hidden shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] hover:shadow-lg transition-shadow group h-full flex flex-col">
+<a href="{{ $project['link'] }}"
+    class="bg-white dark:bg-[#161615] rounded-lg overflow-hidden shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] hover:shadow-lg transition-shadow group h-full flex flex-col min-h-[340px] sm:min-h-[380px] md:min-h-[420px] w-full cursor-pointer"
+    target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
 
     <!-- Image Container with responsive aspect ratio -->
     <div
@@ -11,7 +12,7 @@
     </div>
 
     <!-- Content Container -->
-    <div class="p-4 sm:p-5 md:p-6 flex flex-col justify-between flex-grow">
+    <div class="p-4 sm:p-5 md:p-6 flex flex-col justify-between flex-grow min-h-0 h-full">
         <!-- Title -->
         <h3
             class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 group-hover:text-[#f53003] dark:group-hover:text-[#FF4433] transition-colors line-clamp-2">
@@ -35,17 +36,18 @@
         </div>
 
         <!-- View Project Link -->
-        <a href="{{ $project['link'] }}"
-            class="inline-flex items-center text-[#f53003] dark:text-[#FF4433] hover:underline text-sm sm:text-base mt-auto">
+        <span
+            class="inline-flex items-center text-[#f53003] dark:text-[#FF4433] hover:underline text-sm sm:text-base mt-auto pointer-events-none">
             <span>View Project</span>
             <svg width="14" height="14" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="ml-1.5 sm:ml-2 flex-shrink-0">
                 <path d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001" stroke="currentColor"
                     stroke-linecap="square" />
             </svg>
-        </a>
+        </span>
     </div>
-</div>
+    <!-- end card content -->
+</a>
 
 <style>
     /* Line clamp utilities for text truncation */
@@ -71,6 +73,30 @@
     }
 
     /* Mobile optimization */
+    @media (max-width: 1023px) {
+        .carousel-card {
+            height: 100% !important;
+            min-height: 28rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: stretch !important;
+        }
+
+        .carousel-card>div {
+            height: 100% !important;
+            min-height: 28rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        .group {
+            min-height: 28rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
     @media (max-width: 640px) {
 
         /* Reduce padding on very small screens */

@@ -1,5 +1,25 @@
 /* resources/css/hero-graphic.css */
 
+/* Smooth theme transition */
+:root {
+    transition: background-color 0.3s ease;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
 /* Container & Base Setup */
 .hero-graphic-container {
     position: relative;
@@ -16,6 +36,17 @@
     border: 1px dashed rgba(255, 123, 0, 0.2);
     position: absolute;
     animation: pulse-orbit 4s ease-in-out infinite;
+    transition: border-color 0.3s ease;
+}
+
+/* Dark mode orbit styling */
+:root.dark .orbit {
+    border-color: rgba(255, 68, 51, 0.3);
+}
+
+/* Light mode orbit styling */
+:root:not(.dark) .orbit {
+    border-color: rgba(248, 184, 3, 0.3);
 }
 
 .orbit-outer {
@@ -86,6 +117,14 @@
     box-shadow:
         inset -2px -2px 4px rgba(0, 0, 0, 0.3),
         inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+:root.dark .planet-1 .planet-surface {
+    background: linear-gradient(135deg, #ff6b3d, #ff5722, #f53003);
+    box-shadow:
+        inset -2px -2px 6px rgba(0, 0, 0, 0.5),
+        inset 2px 2px 6px rgba(255, 100, 50, 0.2);
 }
 
 .planet-2 .planet-surface {
@@ -93,6 +132,14 @@
     box-shadow:
         inset -2px -2px 4px rgba(0, 0, 0, 0.3),
         inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+:root.dark .planet-2 .planet-surface {
+    background: linear-gradient(135deg, #ffa726, #ff9800, #F8B803);
+    box-shadow:
+        inset -2px -2px 6px rgba(0, 0, 0, 0.5),
+        inset 2px 2px 6px rgba(255, 200, 100, 0.2);
 }
 
 /* Small Planet Glows */
@@ -102,14 +149,23 @@
     border-radius: 50%;
     opacity: 0.6;
     animation: glow-pulse 2s ease-in-out infinite;
+    transition: background 0.5s ease;
 }
 
 .planet-1 .planet-glow {
     background: radial-gradient(circle, rgba(248, 184, 3, 0.4), transparent 70%);
 }
 
+:root.dark .planet-1 .planet-glow {
+    background: radial-gradient(circle, rgba(255, 68, 51, 0.5), transparent 70%);
+}
+
 .planet-2 .planet-glow {
     background: radial-gradient(circle, rgba(255, 60, 0, 0.4), transparent 70%);
+}
+
+:root.dark .planet-2 .planet-glow {
+    background: radial-gradient(circle, rgba(248, 184, 3, 0.5), transparent 70%);
 }
 
 /* Main Planet */
@@ -145,6 +201,15 @@
         0 0 60px rgba(255, 87, 34, 0.3);
     animation: planet-rotation 30s linear infinite;
     overflow: hidden;
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+:root.dark .planet-surface-main {
+    background: linear-gradient(145deg, #f53003, #ff4433, #ff6b3d);
+    box-shadow:
+        inset -10px -10px 25px rgba(0, 0, 0, 0.6),
+        inset 10px 10px 25px rgba(255, 68, 51, 0.4),
+        0 0 80px rgba(245, 48, 3, 0.5);
 }
 
 /* Main Planet Glow */
@@ -160,6 +225,17 @@
     );
     filter: blur(15px);
     animation: glow-pulse 3s ease-in-out infinite;
+    transition: background 0.5s ease;
+}
+
+:root.dark .planet-glow-main {
+    background: radial-gradient(
+        circle,
+        rgba(245, 48, 3, 0.6),
+        rgba(255, 68, 51, 0.4) 40%,
+        transparent 70%
+    );
+    filter: blur(20px);
 }
 
 /* Planet Texture */
@@ -197,6 +273,12 @@
     background: linear-gradient(135deg, #F8B803, #ff7b00);
     box-shadow: 0 0 10px rgba(248, 184, 3, 0.8);
     animation: tech-pulse 2s ease-in-out infinite;
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+:root.dark .tech-dot {
+    background: linear-gradient(135deg, #ff4433, #f53003);
+    box-shadow: 0 0 15px rgba(245, 48, 3, 0.9);
 }
 
 .tech-dot-1 {
@@ -226,6 +308,11 @@
     border-radius: 50%;
     opacity: 0;
     animation: particle-flow 8s linear infinite;
+    transition: background 0.5s ease;
+}
+
+:root.dark .particle {
+    background: linear-gradient(135deg, #f53003, #ff4433);
 }
 
 .particle-0 { left: 10%; top: 20%; }
