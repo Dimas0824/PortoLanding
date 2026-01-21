@@ -1,16 +1,29 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-ByIa-Mjj.css",
+    "file": "assets/app-DB5Z0j-z.css",
     "src": "resources/css/app.css",
     "isEntry": true,
+    "name": "app",
     "names": [
       "app.css"
     ]
   },
-  "resources/js/app.js": {
-    "file": "assets/app-BmFtOH5B.js",
+  "resources/js/Pages/Portfolio.tsx": {
+    "file": "assets/Portfolio-BnqUE6-Q.js",
+    "name": "Portfolio",
+    "src": "resources/js/Pages/Portfolio.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-L_OvFA2j.js",
     "name": "app",
-    "src": "resources/js/app.js",
-    "isEntry": true
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/Portfolio.tsx"
+    ]
   }
 }

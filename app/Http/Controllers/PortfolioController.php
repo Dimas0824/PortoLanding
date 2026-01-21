@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 
 class PortfolioController extends Controller
 {
@@ -11,8 +12,8 @@ class PortfolioController extends Controller
     {
         $profile = [
             'name' => 'Muhammad Irsyad Dimas Abdillah',
-            'title' => 'Backend Developer | Data Enthusiast | IoT & ML Enthusiast',
-            'bio' => 'Mahasiswa Teknik Informatika di Politeknik Negeri Malang dengan fokus pada pengembangan backend, optimasi database, serta integrasi IoT dan Machine Learning.',
+            'title' => 'Fullstack Developer | Data Enthusiast | IoT & ML Enthusiast',
+            'bio' => 'Mahasiswa Teknik Informatika di Politeknik Negeri Malang dengan fokus pada pengembangan Web, optimasi database, serta integrasi IoT dan Machine Learning.',
             'education' => 'Teknik Informatika - Politeknik Negeri Malang',
             'passion' => [
                 'Backend Development',
@@ -25,11 +26,27 @@ class PortfolioController extends Controller
             'philosophy' => 'First, solve the problem. Then, write the code.',
             'contacts' => [
                 'email' => '2341720088@student.polinema.ac.id',
-                'instagram' => '@not.samiddd',
+                'instagram' => 'https://www.instagram.com/not.samiddd?igsh=dnIwZ3gyN2dhZjV3',
                 'linkedin' => 'https://www.linkedin.com/in/muhammad-irsyad-dimas-abdillah-46424738a/',
                 'github' => 'https://github.com/Dimas0824'
             ]
         ];
+
+        // Auto-discover profile images from public/storage/img
+        $images = [];
+        $imgDir = public_path('storage/img');
+        if (is_dir($imgDir)) {
+            foreach (glob($imgDir . '/*.{jpg,jpeg,png,webp}', GLOB_BRACE) as $file) {
+                // URL-encode the filename to avoid issues with spaces or special chars
+                $encoded = rawurlencode(basename($file));
+                // Use a scheme-relative path so the browser won't try HTTPS when the dev server is HTTP
+                $images[] = '/storage/img/' . $encoded;
+            }
+        }
+
+        if (!empty($images)) {
+            $profile['images'] = $images;
+        }
 
         $skills = [
             'Languages & Frameworks' => [
@@ -125,6 +142,6 @@ class PortfolioController extends Controller
             ],
         ];
 
-        return view('portfolio.index', compact('profile', 'skills', 'portfolios'));
+        return Inertia::render('Portfolio', compact('profile', 'skills', 'portfolios'));
     }
 }

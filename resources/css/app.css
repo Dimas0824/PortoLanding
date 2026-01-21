@@ -1,9 +1,6 @@
 @import "tailwindcss/preflight";
 @tailwind utilities;
 @import "tailwindcss";
-@import './hero-graphic.css';
-@import './skills.css';
-@import './portfolio.css';
 
 @layer base {
     html {
