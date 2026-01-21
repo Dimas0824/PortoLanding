@@ -13,7 +13,7 @@ const Portfolio = () => {
 
     return (
         <>
-            <Head title="Personal Portfolio" />
+            <Head title="Personal Portofolio" />
             <PortfolioApp profile={profile} skills={skills} portfolios={portfolios} />
         </>
     );
