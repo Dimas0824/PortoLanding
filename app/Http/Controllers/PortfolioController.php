@@ -25,7 +25,7 @@ class PortfolioController extends Controller
             ],
             'philosophy' => 'First, solve the problem. Then, write the code.',
             'contacts' => [
-                'email' => '2341720088@student.polinema.ac.id',
+                'email' => 'dimassmadapas@gmail.com',
                 'instagram' => 'https://www.instagram.com/not.samiddd?igsh=dnIwZ3gyN2dhZjV3',
                 'linkedin' => 'https://www.linkedin.com/in/muhammad-irsyad-dimas-abdillah-46424738a/',
                 'github' => 'https://github.com/Dimas0824'
