@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
+use App\Services\SeoService;
 
 class PortfolioController extends Controller
 {
@@ -142,6 +143,30 @@ class PortfolioController extends Controller
             ],
         ];
 
-        return Inertia::render('Portfolio', compact('profile', 'skills', 'portfolios'));
+        // Build SEO meta using SeoService
+        $seo = new SeoService();
+        $meta = $seo->meta([
+            'title' => 'irsyad dimas' . ' · ' . ($profile['title'] ?? 'Portfolio'),
+            'description' => $profile['bio'] ?? null,
+            'og' => [
+                'image' => $profile['images'][0] ?? null,
+            ],
+            'canonical' => rtrim(config('app.url', url('/')), '/') . '/',
+        ]);
+
+        $jsonLd = $seo->jsonLd([
+            'name' => 'irsyad dimas',
+            'description' => $profile['bio'] ?? null,
+            'url' => rtrim(config('app.url', url('/')), '/') . '/',
+            'image' => $profile['images'][0] ?? null,
+            'sameAs' => array_values($profile['contacts'] ?? []),
+        ]);
+
+        return Inertia::render('Portfolio', array_merge(compact('profile', 'skills', 'portfolios'), [
+            'seo' => [
+                'meta' => $meta,
+                'jsonLd' => $jsonLd,
+            ],
+        ]));
     }
 }

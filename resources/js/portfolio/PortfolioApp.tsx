@@ -44,13 +44,23 @@ const PortfolioApp: React.FC<PortfolioAppProps> = ({ profile, skills, portfolios
         <div className="min-h-screen bg-[#FDFCFB] text-[#1A1A1A] font-sans overflow-x-hidden selection:bg-[#F2C18D]">
             <NoiseOverlay />
             <CustomCursor mousePos={mousePos} />
-            <Navbar profile={profile} />
-            <HeroSection profile={profile} isVisible={isVisible} />
-            <MarqueeStrip items={profile.passion ?? []} />
-            <ExpertiseSection expertiseGroups={expertiseGroups} />
-            <ProjectsSection projects={projects} />
-            <ContactSection contacts={profile.contacts} name={profile.name} />
-            <FooterSection contacts={profile.contacts} />
+
+            <header>
+                <Navbar profile={profile} />
+                <HeroSection profile={profile} isVisible={isVisible} />
+            </header>
+
+            <main>
+                <MarqueeStrip items={profile.passion ?? []} />
+                <ExpertiseSection expertiseGroups={expertiseGroups} />
+                <ProjectsSection projects={projects} />
+                <ContactSection contacts={profile.contacts} name={profile.name} />
+            </main>
+
+            <footer>
+                <FooterSection contacts={profile.contacts} />
+            </footer>
+
             <StyleOverrides />
         </div>
     );

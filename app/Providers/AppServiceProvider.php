@@ -23,5 +23,10 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.env') !== 'local') {
             URL::forceScheme('https');
         }
+
+        // Share SEO defaults globally via Inertia (if Inertia is present)
+        if (class_exists(\Inertia\Inertia::class)) {
+            \Inertia\Inertia::share('seo.defaults', (new \App\Services\SeoService())->meta());
+        }
     }
 }

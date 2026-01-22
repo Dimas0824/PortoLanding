@@ -31,12 +31,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <div className="relative h-40 overflow-hidden bg-gray-100 border-b border-[#F5F5F5]">
                 <div className="absolute inset-0 bg-[#1A1A1A]/5 group-hover:bg-transparent transition-colors z-10" />
                 {project.image ? (
-                    <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                        loading="lazy"
-                    />
+                    <picture>
+                        {/\.webp(\?.*)?$/i.test(project.image) && (
+                            <source srcSet={project.image} type="image/webp" />
+                        )}
+                        <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            loading="lazy"
+                            decoding="async"
+                            width={1200}
+                            height={800}
+                        />
+                    </picture>
                 ) : (
                     <div className="w-full h-full bg-gradient-to-br from-[#F2C18D]/50 to-[#C2996B]/40 flex items-center justify-center">
                         <span className="text-[#1A1A1A] font-black text-lg text-center px-6 leading-tight">{project.title}</span>

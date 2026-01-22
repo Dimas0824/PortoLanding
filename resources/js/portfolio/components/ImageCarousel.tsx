@@ -25,17 +25,19 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, intervalMs = 4000
     return (
         <div className={`w-full h-full relative overflow-hidden ${className}`} aria-live="polite">
             {images.map((src, i) => (
-                <img
-                    key={i}
-                    src={src}
-                    alt={`${altPrefix} ${i + 1}`}
-                    loading="lazy"
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${i === index ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
-                    style={{
-                        top: 0,
-                        left: 0,
-                    }}
-                />
+                <picture key={i} className="absolute inset-0 w-full h-full" style={{ top: 0, left: 0 }}>
+                    {/\.webp(\?.*)?$/i.test(src) && <source srcSet={src} type="image/webp" />}
+                    <img
+                        src={src}
+                        alt={`${altPrefix} ${i + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${i === index ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+                        width={1200}
+                        height={800}
+                        style={{ top: 0, left: 0 }}
+                    />
+                </picture>
             ))}
         </div>
     );

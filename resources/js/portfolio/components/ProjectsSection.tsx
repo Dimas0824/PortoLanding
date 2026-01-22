@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import ProjectCard from "./ProjectCard";
+import Breadcrumbs from "./Breadcrumbs";
 import { PortfolioItem } from "../types";
 
 export type ProjectsSectionProps = {
@@ -53,9 +54,12 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
         <section id="work" className="py-16 px-6 md:px-5 bg-[#F9F7F5] border-y border-[#EAD7BB]/50">
             <div className="max-w-6xl mx-auto">
                 <div className="flex flex-wrap justify-between items-end mb-10 gap-4">
-                    <h2 className="text-3xl font-black tracking-tighter">
-                        PROJECTS<span className="text-[#F2C18D]">.</span>
-                    </h2>
+                    <div>
+                        <Breadcrumbs items={[{ title: 'Home', href: '/' }, { title: 'Projects' }]} />
+                        <h2 className="text-3xl font-black tracking-tighter">
+                            PROJECTS<span className="text-[#F2C18D]">.</span>
+                        </h2>
+                    </div>
                     <div className="hidden md:block h-[1px] bg-[#EAD7BB] flex-grow ml-6 mb-1" />
                 </div>
 
