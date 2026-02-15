@@ -16,8 +16,24 @@
             }
         })();
     </script>
-    @viteReactRefresh
+    @if (app()->isLocal())
+        @viteReactRefresh
+    @endif
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+    @if (!app()->isLocal())
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8REYLFVXT"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-V8REYLFVXT');
+        </script>
+    @endif
     @inertiaHead
 </head>
 
