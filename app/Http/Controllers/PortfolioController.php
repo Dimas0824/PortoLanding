@@ -121,6 +121,22 @@ class PortfolioController extends Controller
                 'link' => 'https://github.com/VarizkyNaldiba/TataTertibMhs',
             ],
             [
+                'title' => 'DiscipLink V2 — Secure MVC Refactor',
+                'description' => 'Refactor arsitektur DiscipLink dengan pola MVC + Request Handler + Central Router untuk memisahkan alur halaman, aksi, dan akses data. '
+                    . 'Fokus pada hardening keamanan melalui tokenisasi ID sensitif, token crypto dengan session binding, idle session timeout, upload/download whitelist, '
+                    . 'serta standarisasi feedback UI, error handling HTML/JSON, dan SEO header management.',
+                'tech' => ['PHP Native', 'PDO', 'MySQL', 'MVC', 'Vanilla JS', 'Security'],
+                'link' => 'https://github.com/Dimas0824/TataTertibMhsV2.git',
+            ],
+            [
+                'title' => 'Oi!Kerjain — Daily Task Scheduler',
+                'description' => 'Aplikasi task scheduler harian dengan UI neuromorphic untuk membantu pengguna tetap terorganisir dan konsisten menyelesaikan tugas. '
+                    . 'Menyediakan manajemen tugas cepat (work/personal, prioritas, repeat), history 14 hari dengan filter mingguan/custom range, '
+                    . 'serta local notification dengan escalation reminder dan quick actions seperti DONE dan SNOOZE.',
+                'tech' => ['Flutter', 'Dart', 'Local Notification', 'Task Management', 'Neuromorphic UI'],
+                'link' => 'https://github.com/Dimas0824/Oi-Kerjain.git',
+            ],
+            [
                 'title' => 'Sistem Kasir Cafe (CASS)',
                 'description' => 'Aplikasi Point of Sale (POS) berbasis Command-Line Interface (CLI) untuk membantu operasional kafe, '
                     . 'meliputi manajemen menu, stok inventori, dan laporan penjualan secara terstruktur.',

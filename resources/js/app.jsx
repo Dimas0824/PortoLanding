@@ -1,9 +1,8 @@
 import './bootstrap';
 
 import { createRoot } from 'react-dom/client';
-import { createInertiaApp } from '@inertiajs/react';
+import { createInertiaApp, router } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { Inertia } from '@inertiajs/react';
 
 const appName = document.getElementsByTagName('title')[0]?.innerText || 'Personal Portfolio';
 
@@ -28,6 +27,6 @@ createInertiaApp({
         };
 
         sendPageView(props.initialPage.url);
-        Inertia.on('navigate', (event) => sendPageView(event.detail.page.url));
+        router.on('navigate', (event) => sendPageView(event.detail.page.url));
     },
 });

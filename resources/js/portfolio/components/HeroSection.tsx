@@ -69,12 +69,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ profile, isVisible }) => (
                 </div>
             </div>
 
-            <div className={`hidden md:block lg:col-span-5 relative transition-all duration-1000 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"} mt-10`}>
-                <div className="relative">
-                    <AbstractLines className="absolute -top-10 -left-10 w-[120%] h-[120%] opacity-60" />
+            <div className={`hidden md:flex lg:col-span-5 relative items-center justify-center transition-all duration-1000 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"} mt-10`}>
+                <div className="relative w-72 h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
+                    <AbstractLines className="absolute -top-16 -left-16 w-[140%] h-[140%] opacity-40 scale-110" />
 
-                    <div className="relative rounded-[34px] bg-white border border-[#1A1A1A]/10 shadow-[0_30px_80px_-45px_rgba(0,0,0,0.40)] p-3">
-                        <div className="rounded-[28px] overflow-hidden aspect-[4/5] bg-gray-100">
+                    <div className="relative w-full h-full p-2">
+                        {/* Abstract shape container using custom border-radius */}
+                        <div className="w-full h-full overflow-hidden shadow-2xl relative z-10" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                             {/* Image carousel: uses profile.images if present, else fallbacks */}
                             <ImageCarousel
                                 images={
@@ -91,18 +92,23 @@ const HeroSection: React.FC<HeroSectionProps> = ({ profile, isVisible }) => (
                             />
                         </div>
 
-                        <div className="absolute -top-5 -left-5 bg-white border border-[#1A1A1A] p-3 rounded-full shadow-lg -rotate-12">
-                            <Smile className="w-6 h-6 text-[#F2C18D]" />
+                        {/* Floating elements adjusted to match the compact abstract shape */}
+                        <div className="absolute top-2 -left-6 z-20 bg-white border border-[#1A1A1A] p-2.5 rounded-[40%_60%_70%_30%] shadow-lg -rotate-12 hover:rotate-0 transition-transform cursor-default">
+                            <Smile className="w-5 h-5 text-[#F2C18D]" />
                         </div>
 
-                        <div className="absolute -bottom-5 -right-5 bg-[#1A1A1A] text-white px-4 py-3 rounded-2xl shadow-xl border border-white/10">
-                            <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#F2C18D]">AVAILABLE</div>
-                            <div className="text-xs font-semibold opacity-90">Reply ≤ 24 jam</div>
+                        <div className="absolute bottom-4 -right-12 z-20 bg-[#1A1A1A] text-white px-4 py-2.5 rounded-[2rem_2rem_0_2rem] shadow-xl border border-white/10 hover:scale-105 transition-transform cursor-default">
+                            <div className="flex items-center gap-2 mb-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                <div className="text-[9px] font-black uppercase tracking-[0.2em] text-[#F2C18D]">AVAILABLE</div>
+                            </div>
+                            <div className="text-[10px] font-medium opacity-90">Reply ≤ 24 jam</div>
                         </div>
                     </div>
 
-                    <div className="absolute -z-10 -inset-3 rounded-[40px] border border-[#C2996B]/15" />
-                    <div className="absolute -z-10 -inset-8 rounded-[48px] border border-[#F2C18D]/10" />
+                    {/* Decorative abstract blob backgrounds */}
+                    <div className="absolute -z-10 bg-[#C2996B]/15 w-full h-full top-4 left-6" style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }} />
+                    <div className="absolute -z-10 bg-[#F2C18D]/20 w-[90%] h-[90%] -bottom-6 -left-4" style={{ borderRadius: '50% 50% 30% 70% / 60% 30% 70% 40%' }} />
                 </div>
             </div>
         </div>
