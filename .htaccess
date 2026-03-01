@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If request is already for /public, do nothing.
+    RewriteRule ^public/ - [L]
+
+    # Send home URL directly to Laravel front controller.
+    RewriteRule ^$ public/index.php [L]
+
+    # Route all other requests through /public when file/dir is not found in project root.
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Protect sensitive files if this directory is used as DocumentRoot.
+<FilesMatch "^(\.env|artisan|composer\.(json|lock)|package\.(json|lock)|phpunit\.xml)$">
+    Require all denied
+</FilesMatch>

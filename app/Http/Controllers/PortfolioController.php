@@ -33,15 +33,15 @@ class PortfolioController extends Controller
             ]
         ];
 
-        // Auto-discover profile images from public/storage/img
+        // Auto-discover profile images from storage/app/public/img
+        // We serve them via a Laravel route to avoid symlink issues on shared hosting.
         $images = [];
-        $imgDir = public_path('storage/img');
+        $imgDir = storage_path('app/public/img');
         if (is_dir($imgDir)) {
             foreach (glob($imgDir . '/*.{jpg,jpeg,png,webp}', GLOB_BRACE) as $file) {
                 // URL-encode the filename to avoid issues with spaces or special chars
                 $encoded = rawurlencode(basename($file));
-                // Use a scheme-relative path so the browser won't try HTTPS when the dev server is HTTP
-                $images[] = '/storage/img/' . $encoded;
+                $images[] = '/media/profile/' . $encoded;
             }
         }
 
@@ -184,5 +184,19 @@ class PortfolioController extends Controller
                 'jsonLd' => $jsonLd,
             ],
         ]));
+    }
+
+    public function profileImage(string $filename)
+    {
+        $filename = basename(rawurldecode($filename));
+        $path = storage_path('app/public/img/' . $filename);
+
+        if (!is_file($path)) {
+            abort(404);
+        }
+
+        return response()->file($path, [
+            'Cache-Control' => 'public, max-age=604800',
+        ]);
     }
 }

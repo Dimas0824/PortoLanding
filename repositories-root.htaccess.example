@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Canonical URL: hide internal Laravel path from browser URL.
+    RewriteCond %{THE_REQUEST} \s/+PortoLanding/public(?:/index\.php)?[?\s] [NC]
+    RewriteRule ^PortoLanding/public(?:/index\.php)?$ / [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+PortoLanding/public/(.+?)[?\s] [NC]
+    RewriteRule ^PortoLanding/public/(.*)$ /$1 [R=301,L]
+
+    # Block direct access to non-public Laravel paths under /PortoLanding.
+    RewriteRule ^PortoLanding/(?!public/).+ - [F,L,NC]
+
+    # Keep existing files/directories in /repositories untouched.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Send root URL directly to Laravel front controller.
+    RewriteRule ^$ PortoLanding/public/index.php [L]
+
+    # Internal rewrite from repositories root to Laravel public directory.
+    RewriteRule ^(.*)$ PortoLanding/public/$1 [L]
+</IfModule>

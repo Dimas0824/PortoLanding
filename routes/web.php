@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [PortfolioController::class, 'index'])->name('home');
+Route::get('/media/profile/{filename}', [PortfolioController::class, 'profileImage'])
+    ->where('filename', '.*')
+    ->name('media.profile');
 
 Route::get('/health', fn() => response()->json([
     'status' => 'ok',
