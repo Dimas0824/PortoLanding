@@ -26,7 +26,11 @@ class AppServiceProvider extends ServiceProvider
 
         // Share SEO defaults globally via Inertia (if Inertia is present)
         if (class_exists(\Inertia\Inertia::class)) {
-            \Inertia\Inertia::share('seo.defaults', (new \App\Services\SeoService())->meta());
+            \Inertia\Inertia::share('seo.defaults', (new \App\Services\SeoService)->meta());
+            \Inertia\Inertia::share('flash', fn (): array => [
+                'success' => session('success'),
+                'error' => session('error'),
+            ]);
         }
     }
 }

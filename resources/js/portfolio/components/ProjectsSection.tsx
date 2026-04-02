@@ -73,9 +73,9 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
     return (
         <section id="work" className="py-24 px-4 overflow-hidden bg-gradient-to-b from-[#F9F7F5] to-white border-y border-[#EAD7BB]/30">
             <div className="max-w-[1400px] mx-auto">
-                <div className="flex flex-col items-center mb-10 text-center">
+                <div className="flex flex-col items-center mb-4 text-center">
                     <Breadcrumbs items={[{ title: 'Home', href: '/' }, { title: 'Projects' }]} />
-                    <h2 className="text-4xl md:text-5xl font-black tracking-tighter mt-4 mb-4">
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tighter mt-2 mb-2">
                         FEATURED <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C2996B] to-[#F2C18D]">WORKS.</span>
                     </h2>
                     <p className="text-gray-500 text-sm max-w-lg">
@@ -86,7 +86,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                 {/* 3D Carousel Container */}
                 <div
                     ref={containerRef}
-                    className="relative h-[500px] md:h-[550px] w-full flex items-center justify-center perspective-[1000px] mb-12"
+                    className="relative h-[440px] md:h-[500px] w-full flex items-center justify-center perspective-[1000px] mb-6"
                 >
                     {projects.length > 0 ? (
                         projects.map((project, index) => {

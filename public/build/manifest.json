@@ -1,13 +1,13 @@
 {
-  "_createLucideIcon-WC0W9yMU.js": {
-    "file": "assets/createLucideIcon-WC0W9yMU.js",
+  "_createLucideIcon-yPAeClYA.js": {
+    "file": "assets/createLucideIcon-yPAeClYA.js",
     "name": "createLucideIcon",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-DFQSQFdm.css",
+    "file": "assets/app-Dc-0uvUR.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -15,32 +15,62 @@
       "app.css"
     ]
   },
+  "resources/js/Pages/Admin/Content.tsx": {
+    "file": "assets/Content-CJD3G5a-.js",
+    "name": "Content",
+    "src": "resources/js/Pages/Admin/Content.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Admin/Login.tsx": {
+    "file": "assets/Login-DCD-tHMg.js",
+    "name": "Login",
+    "src": "resources/js/Pages/Admin/Login.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Admin/Setup.tsx": {
+    "file": "assets/Setup-BZxKJbTa.js",
+    "name": "Setup",
+    "src": "resources/js/Pages/Admin/Setup.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
   "resources/js/Pages/Errors/NotFound.tsx": {
-    "file": "assets/NotFound-Djw-dke8.js",
+    "file": "assets/NotFound-Cl06eJsP.js",
     "name": "NotFound",
     "src": "resources/js/Pages/Errors/NotFound.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_createLucideIcon-WC0W9yMU.js"
+      "_createLucideIcon-yPAeClYA.js"
     ]
   },
   "resources/js/Pages/Portfolio.tsx": {
-    "file": "assets/Portfolio-DHTGbqtR.js",
+    "file": "assets/Portfolio-DRwMPh4E.js",
     "name": "Portfolio",
     "src": "resources/js/Pages/Portfolio.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_createLucideIcon-WC0W9yMU.js"
+      "_createLucideIcon-yPAeClYA.js"
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-FbQKF6L5.js",
+    "file": "assets/app-Cya8Zt5N.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "dynamicImports": [
+      "resources/js/Pages/Admin/Content.tsx",
+      "resources/js/Pages/Admin/Login.tsx",
+      "resources/js/Pages/Admin/Setup.tsx",
       "resources/js/Pages/Errors/NotFound.tsx",
       "resources/js/Pages/Portfolio.tsx"
     ]

@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { createInertiaApp, router } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
-const appName = document.getElementsByTagName('title')[0]?.innerText || 'Personal Portfolio';
+const appName = document.getElementsByTagName('title')[0]?.innerText || 'Irsyad Dimas · Web Systems & Data Solutions';
 
 createInertiaApp({
     title: (title) => (title ? `${title} · ${appName}` : appName),

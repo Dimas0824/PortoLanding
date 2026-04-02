@@ -8,7 +8,7 @@ export type FooterSectionProps = {
 const FooterSection: React.FC<FooterSectionProps> = ({ contacts }) => (
     <footer className="py-12 border-t border-[#E5E5E5] bg-[#FDFCFB] text-center">
         <div className="max-w-6xl mx-auto px-6 flex flex-col items-center gap-4">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C2996B]">© 2025 Crafted with Anu hehe</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C2996B]">© 2025 Irsyad Dimas. Built for focused digital work.</p>
             <div className="flex gap-6 text-[11px] font-bold uppercase tracking-widest text-gray-400">
                 {contacts.instagram && (
                     <a href={contacts.instagram} className="hover:text-[#1A1A1A]" target="_blank" rel="noreferrer">
